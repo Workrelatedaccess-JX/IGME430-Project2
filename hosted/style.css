@@ -1,274 +1,304 @@
-html, body {
-    height: 100%;
-    width: 100%;
+:root {
+    --orange: #f76902;
+    --orange-dark: #c75300;
+    --ink: #1d1d1f;
+    --grey-text: #5f6368;
+    --grey-border: #c8ccce;
+    --grey-bg: #d0d4d5;
+    --page: #f3f4f4;
+    --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
     margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+    font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--page);
+    color: var(--ink);
+    line-height: 1.5;
 }
 
-#logo {
-    height: 40px;
-    width: 40;
-    padding-top: 5px;
-    float:left;
-    border-radius: 8px;
-}
+.hidden { display: none !important; }
 
-nav {
-    width: 100%;
-    height: 50px;
-    background-color: #55acee;
-}
-
-nav:nth-child(1) {
-    padding-left: 25px;
-}
-
-.navlink {
-    padding: 5px;
-    padding-top: 12px;
-    padding-left: 20px;
-    color: white;
-    font-size: 1.3em;
-    float: left;
-}
-
-.navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
-    color: white;
+/* Logo: orange RIT, thin divider, then the app name */
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
     text-decoration: none;
-    padding: 5px;
-    border-radius: 4px;
-    background-color: #55acee;
-    transition: background-color 0.4s ease;
 }
 
-.navlink a:hover {
-    transition: background-color 0.8s ease;
-    background-color: #66bdff;
+.logoRit {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--orange);
 }
 
-.domoForm {
-    border: 2px solid #338acc;
-    height: 35px;
-    width: 700px;
-    margin-top:0px;
-    padding-top:10px;
-    background-color: #55acee;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-    /* New change: Keep all form elements on one line */
+.logoDivider {
+    width: 1px;
+    height: 30px;
+    background: var(--ink);
+}
+
+.logoVoice {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--orange-dark);
+}
+
+/* Header shown after login: logo on the left, user name and log out on the right */
+.siteHeader {
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    padding: 14px 32px;
+    background: var(--white);
+    border-bottom: 1px solid var(--grey-border);
 }
 
-.domoForm label {
-    display: inline-block;
-    width: 75px;
-    margin-left: 10px;
-    font-size: 1.2em;
-    color: white;
-    float: none;
-    white-space: nowrap;
+.userMenu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
 }
 
-/* New changes: give all form inputs the same width and height */
-.domoForm input[type="text"],
-.domoForm input[type="number"] {
-    width: 120px;
-    height: 30px;
-    box-sizing: border-box;
-}
-
-.makeDomoSubmit {
-    transition: background-color 0.4s ease;
-    display: inline;
-    width: 90px;
-    background-color: #55acee;
-    border-radius: 2px;
-    color: white;
+.userMenu a {
+    color: var(--ink);
     text-decoration: none;
 }
 
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
-    color: white;
-}
+.userMenu a:hover { color: var(--orange-dark); }
 
-.makeDomoSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
-}
-
-.mainForm {
-    height: 300px;
-    width: 350px;
+#app {
+    max-width: 960px;
     margin: 0 auto;
-    padding-top: 350px;
-    font-size: 1.2em;
+    padding: 28px 24px 60px;
 }
 
-.mainForm h3 {
-    text-align: center;
+h2 {
+    margin: 0 0 4px;
+    font-size: 1.3rem;
+    font-weight: 500;
 }
 
-.mainForm label {
-    display: inline-block;
-    width: 100px;
-    margin-right: 10px;
-    text-align: right;
-    font-size: 1.2em;
+/* Inputs and boxes have sharp corners throughout */
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    font: inherit;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+    border-radius: 0;
 }
 
-.formSubmit {
-    transition: background-color 0.4s ease;
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 14px;
-    font-size: 1.2em;
-    width: 100px;
-    background-color: #55acee;
-    border-radius: 2px;
-    border-color: #66acee;
-    padding: 3px 0px;
-    color: white;
-    text-decoration: none;
-}
-
-.formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: white;
-}
-
-.formSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
-}
-
-#user, #pass, #pass2 {
-    text-align: center;
-    font-size: 1.1em;
-    width: 180px;
-    border-radius: 6px;
-}
-
-#user:focus, #pass:focus, #pass2:focus {
+input:focus, select:focus, textarea:focus {
     outline: none;
-    box-shadow: 0px 0px 1px 1px #55acee;
+    border-color: var(--ink);
 }
 
-.hidden {
-    display: none;
+label {
+    display: block;
+    margin: 14px 0 4px;
+    font-size: 0.85rem;
+    color: var(--grey-text);
 }
 
-#domoMessage {
-    top: 250px;
-    width: 250px;
-    height: 650px;
-    position: absolute;
-    z-index: 200;
-    right: 0px;
-    overflow: hidden;
-}
-
-#domoMessage h3 {
-    width: 200px;
-    position: absolute;
-    top: 0px;
-    left: 20px;
-}
-
-#speech {
-    height: 120px;
-    width: 250px;
-    z-index:300;
-}
-
-#errorMessage {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: red;
-    font-style: italic;
-}
-
-#domo {
-    z-index: 225;
-    margin-top: -20px;
-    margin-left: 135px;
-    height: 450px;
-    width: 300px;
-    -ms-transform: rotate(330deg);
-    -webkit-transform: rotate(330deg); 
-    transform: rotate(330deg);
-}
-
-#domos {
-    width: 40%;
-    min-width: 400px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
-    margin: 0 auto;
-    margin-top: 100px;
-}
-
-.domo {
-    width: 95%;
-    margin: 0 auto;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
-    background-color: #55acee;
-    padding: 10px;
-    min-height:60px;
-    overflow: hidden;
-}
-
-.domo:hover {
-    transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
-}
-
-img.domoFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
-    float:left;
-}
-
-h3.emptyDomo {
-    width: 400px;
-    font-size: 1.5em;
-    margin: 0 auto;
-    text-align: center;
+.formSubmit,
+.primaryButton {
     margin-top: 18px;
+    padding: 14px 24px;
+    font: inherit;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--orange);
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
 }
 
-h3.domoName {
-    float:left;
-    width: 200px;
-    font-weight: bold;
-    padding-left: 65px;
-    font-size: 1.5em;
+.formSubmit:hover,
+.primaryButton:hover { background: var(--orange-dark); }
+
+/* Login and signup page: grey backdrop with a centered white card and orange top edge */
+.authBody { background: var(--grey-bg); }
+
+.authPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
-h3.domoAge {
-    float:right;
-    text-align: left;
-    width: 100px;
-    font-weight: bold;
-    padding-right: 40px;
-    font-size: 1.5em;
+.authCard {
+    width: 100%;
+    max-width: 440px;
+    padding: 32px 40px 36px;
+    background: var(--white);
+    border-top: 6px solid var(--orange);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-.domo:first-child {
-    margin-top: 10px;
+.authForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 28px;
 }
 
-.domo:last-child {
-    margin-bottom:10px;
+.authForm h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 1.7rem;
+}
+
+.authSubtitle {
+    margin: 0 0 8px;
+    text-align: center;
+    color: var(--grey-text);
+}
+
+.authForm .formSubmit {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.authSwitch {
+    margin: 14px 0 0;
+    text-align: center;
+}
+
+.linkButton {
+    padding: 0;
+    font: inherit;
+    color: var(--orange-dark);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.linkButton:hover { text-decoration: underline; }
+
+/* Boxes on the main page */
+.suggestionForm {
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Tabs switch between the public feed and My Suggestions */
+.tabs {
+    display: flex;
+    margin: 32px 0 16px;
+    border-bottom: 1px solid var(--grey-border);
+}
+
+.tab {
+    padding: 10px 20px;
+    font: inherit;
+    color: var(--grey-text);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    cursor: pointer;
+}
+
+.tab:hover { color: var(--ink); }
+
+.tab.active {
+    color: var(--ink);
+    font-weight: 700;
+    border-bottom-color: var(--orange);
+}
+
+.categoryFilter {
+    max-width: 260px;
+    margin-bottom: 18px;
+}
+
+.categoryFilter label { margin-top: 0; }
+
+/* Suggestion cards */
+.suggestionList {
+    display: grid;
+    gap: 14px;
+}
+
+.suggestionCard {
+    padding: 18px 22px;
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+}
+
+.suggestionCard h3 {
+    margin: 10px 0 6px;
+    font-size: 1.15rem;
+}
+
+.suggestionCard p {
+    margin: 0 0 14px;
+    white-space: pre-wrap;
+}
+
+.categoryTag {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--grey-text);
+    border: 1px solid var(--grey-border);
+}
+
+.suggestionCard footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.85rem;
+    color: var(--grey-text);
+}
+
+.emptyMessage {
+    padding: 32px;
+    text-align: center;
+    color: var(--grey-text);
+    background: var(--white);
+    border: 1px solid var(--grey-border);
+}
+
+/* Error banner */
+#errorBox {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    font-weight: 500;
+    color: var(--white);
+    background: var(--ink);
+    border-left: 5px solid var(--orange);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 600px) {
+    .formRow { grid-template-columns: 1fr; }
+    .siteHeader { padding: 12px 16px; }
+    .authCard { padding: 24px; }
 }

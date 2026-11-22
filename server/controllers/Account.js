@@ -46,8 +46,8 @@ const signup = async (req, res) => {
         // Save the safe account data which are id and username into the session
         req.session.account = Account.toAPI(newAccount);
 
-        // Redirect the user to the /maker page.
-        return res.json({ redirect: '/maker' });
+        // Redirect the user to the /feed page.
+        return res.json({ redirect: '/feed' });
 
     } catch (err) {
         // MongoDB error catch.
@@ -89,7 +89,7 @@ const login = (req, res) => {
         req.session.account = Account.toAPI(account);
 
         // If reach here, authentication was successful, redirect to the main page.
-        return res.json({ redirect: '/maker' });
+        return res.json({ redirect: '/feed' });
     });
 };
 

@@ -40,7 +40,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 // If the connection fails, it will log an error message and throw the error, preventing the server from starting. 
 // This ensures that the application does not run without a database connection.
 // if MongoDB URL exist, use it, otherwise use local MongoDB URL
-const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/DomoMaker';
+const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/RITVoice';
 mongoose.connect(dbURI).catch((err) => {
     if (err) {
         console.log('Could not connect to database');
@@ -88,7 +88,7 @@ redisClient.connect().then(() => {
         store: new RedisStore({
             client: redisClient,
         }),
-        secret: 'Domo Arigato',
+        secret: process.env.SESSION_SECRET || 'ritvoice-local-dev-secret',
         resave: false,
         saveUninitialized: false,
     }));

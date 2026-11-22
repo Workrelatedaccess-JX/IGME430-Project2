@@ -10,10 +10,10 @@ const requiresLogin = (req, res, next) => {
 
 // Check if the user is logged out
 // if yes, call next() to continue to the next middleware or route handler, 
-// otherwise redirect to the maker page
+// otherwise redirect to the feed page
 const requiresLogout = (req, res, next) => {
     if (req.session.account) {
-        return res.redirect('/maker');
+        return res.redirect('/feed');
     }
     return next();
 };

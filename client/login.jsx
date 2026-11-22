@@ -1,5 +1,6 @@
 const helper = require('./helper.js');
 const React = require('react');
+const { useState } = React;
 const { createRoot } = require('react-dom/client');
 
 // login form logic
@@ -50,70 +51,91 @@ const handleSignup = (e) => {
     return false;
 };
 
+// A new addition to the login page,
+// this component renders the RIT Voice logo at the top of the login and signup forms
+const Logo = () => (
+    <div className="logo">
+        <span className="logoRit">RIT</span>
+        <span className="logoDivider"></span>
+        <span className="logoVoice">Voice</span>
+    </div>
+);
+
 // login form format in the login page, 
+// now changed to a React component, 
 // with username and password input fields and a submit button
-// when called, it will make the page for login form.
-const LoginWindow = (props) => {
-    return (
-        <form id="loginForm"
-            name="loginForm"
-            onSubmit={handleLogin}
-            action="/login"
-            method="POST"
-            className="mainForm"
-        >
-            <label htmlFor="username">Username: </label>
-            <input id="user" type="text" name="username" placeholder="username" />
-            <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="password" />
-            <input className="formSubmit" type="submit" value="Sign in" />
-        </form>
-    );
-};
+const LoginWindow = ({ onSwitch }) => (
+    <form id="loginForm"
+        name="loginForm"
+        onSubmit={handleLogin}
+        action="/login"
+        method="POST"
+        className="authForm"
+    >
+        <h1>Log In</h1>
+        <p className="authSubtitle">Share and browse ideas to improve campus</p>
+        <input id="user" type="text" name="username" placeholder="Username" aria-label="Username" />
+        <input id="pass" type="password" name="pass" placeholder="Password" aria-label="Password" />
+        <input className="formSubmit" type="submit" value="Log In" />
+        <p className="authSwitch">
+            Need an account?{' '}
+            <button type="button" className="linkButton" onClick={onSwitch}>Sign up</button>
+        </p>
+    </form>
+);
 
 // signup form format in the signup page,
-// with username, password, and retype password input fields and a submit button
-// when called, it will make the page for signup form.
-const SignupWindow = (props) => {
+// now changed to a React component,
+// with username, password, and password confirmation input fields and a submit button
+const SignupWindow = ({ onSwitch }) => (
+    <form id="signupForm"
+        name="signupForm"
+        onSubmit={handleSignup}
+        action="/signup"
+        method="POST"
+        className="authForm"
+    >
+        <h1>Create Account</h1>
+        <p className="authSubtitle">Join RIT Voice to share your ideas</p>
+        <input id="user" type="text" name="username" placeholder="Username" aria-label="Username" />
+        <input id="pass" type="password" name="pass" placeholder="Password" aria-label="Password" />
+        <input id="pass2" type="password" name="pass2" placeholder="Retype password" aria-label="Retype password" />
+        <input className="formSubmit" type="submit" value="Sign Up" />
+        <p className="authSwitch">
+            Already have an account?{' '}
+            <button type="button" className="linkButton" onClick={onSwitch}>Log in</button>
+        </p>
+    </form>
+);
+
+// With login and signup forms change to react components, 
+// this function is used to render the logo in the login and signup pages,
+// and switch between the login and signup forms when the user clicks the switch button.
+const AuthPage = () => {
+    const [mode, setMode] = useState('login');
+
+    // Swap forms and clear any leftover error message
+    const switchMode = (nextMode) => {
+        helper.hideError();
+        setMode(nextMode);
+    };
+
     return (
-        <form id="signupForm"
-            name="signupForm"
-            onSubmit={handleSignup}
-            action="/signup"
-            method="POST"
-            className="mainForm"
-        >
-            <label htmlFor="username">Username: </label>
-            <input id="user" type="text" name="username" placeholder="username" />
-            <label htmlFor="pass">Password: </label>
-            <input id="pass" type="password" name="pass" placeholder="password" />
-            <label htmlFor="pass">Password: </label>
-            <input id="pass2" type="password" name="pass2" placeholder="retype password" />
-            <input className="formSubmit" type="submit" value="Sign up" />
-        </form>
+        <div className="authPage">
+            <div className="authCard">
+                <Logo />
+                {mode === 'login'
+                    ? <LoginWindow onSwitch={() => switchMode('signup')} />
+                    : <SignupWindow onSwitch={() => switchMode('login')} />}
+            </div>
+        </div>
     );
 };
 
 // Initialize the page by rendering the login form and setting up event listeners for the login and signup buttons
 const init = () => {
-    const loginButton = document.getElementById('loginButton');
-    const signupButton = document.getElementById('signupButton');
-
     const root = createRoot(document.getElementById('content'));
-
-    loginButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        root.render(<LoginWindow />);
-        return false;
-    });
-
-    signupButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        root.render(<SignupWindow />);
-        return false;
-    });
-
-    root.render(<LoginWindow />);
+    root.render(<AuthPage />);
 };
 
 window.onload = init;
